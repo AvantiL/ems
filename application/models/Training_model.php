@@ -15,9 +15,16 @@ class Training_model extends CI_Model
             'role_id' => 2, // role id of hod
         );
 
-        $hod_id = (array) $this->db->where($condition)->get('employees')->result()[0];
+        if($this->db->where($condition)->get('employees')->num_rows() > 0){
+            $hod_id = (array) $this->db->where($condition)->get('employees')->result()[0];
 
-        return $hod_id['sevarth_id'];
+            return $hod_id['sevarth_id'];
+
+        }else{
+            sendError(array('error ' => "not found"));
+        }
+
+        
     }
 
     public function get_principal_by_organization($department_id, $organization_id)
@@ -28,9 +35,13 @@ class Training_model extends CI_Model
             'role_id' => 3, // role id of principal
         );
 
-        $hod_id = (array) $this->db->where($condition)->get('employees')->result()[0];
+        if($this->db->where($condition)->get('employees')->num_rows() > 0){
+            $principal_id = (array) $this->db->where($condition)->get('employees')->result()[0];
 
-        return $hod_id['sevarth_id'];
+            return $principal_id['sevarth_id'];
+        }else{
+            sendError(array('error ' => "not found"));
+        }
     }
 
     public function save_details(
@@ -43,7 +54,11 @@ class Training_model extends CI_Model
         $organized_by,
         $training_status,
         $hod_id,
-        $principal_id) {
+        $principal_id,
+        $apply_letter) {    
+
+        if($sevarth_id == null) sendError(array('error' => "sevarth id is null at 59 training model"));
+            
         $data = array(
             'sevarth_id' => $sevarth_id,
             'name' => $training_name,
@@ -55,6 +70,7 @@ class Training_model extends CI_Model
             'training_status_id' => $training_status,
             'hod_id' => $hod_id,
             'principal_id' => $principal_id,
+            'apply_letter' => $apply_letter
         );
 
         $this->db->insert('training', $data);
@@ -89,4 +105,9 @@ class Training_model extends CI_Model
 
         $this->db->where('id', $training_id)->update('training', $data);
     }
+
+    public function getTrainingsById($sevarthId){
+        return $this->db->where('sevarth_id', $sevarthId)->get('training')->result();
+    }
+        
 }
