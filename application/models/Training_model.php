@@ -110,4 +110,36 @@ class Training_model extends CI_Model
         return $this->db->where('sevarth_id', $sevarthId)->get('training')->result();
     }
         
+
+    public function getTrainingsByHodId($hodId){
+
+        $condition = array(
+            "hod_id" => $hodId,
+            "training_status_id" => "1"
+        );
+
+        return $this->db->where($condition)->get('training')->result();
+    }
+
+    public function getTrainingsByPrincipalId($principalID){
+
+        $condition = array(
+            "hod_id" => $principalID,
+            "training_status_id" => "2"
+        );
+        
+        return $this->db->where($condition)->get('training')->result();
+
+    }
+        
+    public function updateTrainingStatusId($training_id, $training_status_id){
+
+        $data = array(
+          "training_status_id" => $training_status_id  
+        );    
+        
+        $this->db->where('id', $training_id)->update('training', $data);
+
+        return array("status" => "Training Status ID Updated");
+    }
 }

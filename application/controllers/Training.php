@@ -74,17 +74,6 @@ class Training extends CI_Controller
 
     }
 
-    public function update_training_status()
-    {
-        $training_id = $this->input->post('training_id');
-
-        $current_training_status = $this->Training_model->get_training_status($training_id);
-
-        $this->Training_model->update_training_status($training_id, $current_training_status);
-
-        sendSuccess('Training status updated successfully');
-    }
-
     public function upload_training_certificate()
     {
 
@@ -127,6 +116,33 @@ class Training extends CI_Controller
     
     }
     
+    public function get_trainings_by_hod(){
+        $hod_id = $this->input->post("hod_id");
+
+        $result = $this->Training_model->getTrainingsByHodId($hod_id);
+
+        sendSuccess($result);
+
+    }
+
+    public function get_trainings_by_principal(){
+        $principal_id = $this->input->post("principal_id");
+
+        $result = $this->Training_model->getTrainingsByPrincipalId($principal_id);
+
+        sendSuccess($result);
+
+    }
+
+    public function update_training_status(){
+        
+        $training_id = $this->input->post('training_id');
+        $training_status_id = $this->input->post('training_status_id');
+
+        $result = $this->Training_model->updateTrainingStatusId($training_id, $training_status_id);
+
+        sendSuccess($result);
     
+    }
 
 }
