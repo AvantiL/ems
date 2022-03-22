@@ -24,6 +24,8 @@ class Training extends CI_Controller
 
         $org_id = $this->input->post('org_id');
         $department_id = $this->input->post('department_id');
+        $selected_type = $this->input->post('training_type');
+
 
 
 
@@ -59,6 +61,7 @@ class Training extends CI_Controller
                 $training_status,
                 $hod_id,
                 $principal_id,
+                $selected_type,
                 $fileName
             );
 
@@ -143,6 +146,13 @@ class Training extends CI_Controller
 
         sendSuccess($result);
     
+    }
+
+    public function get_training_types(){
+        
+        $result = $this->Training_model->getTrainingTypes();
+
+        sendSuccess($result);
     }
 
 }

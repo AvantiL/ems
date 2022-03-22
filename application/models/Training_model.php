@@ -27,6 +27,10 @@ class Training_model extends CI_Model
         
     }
 
+    public function getTrainingTypes(){
+        return $this->db->get("training_type")->result();
+    }
+
     public function get_principal_by_organization($department_id, $organization_id)
     {
         $condition = array(
@@ -55,6 +59,7 @@ class Training_model extends CI_Model
         $training_status,
         $hod_id,
         $principal_id,
+        $training_type,
         $apply_letter) {    
 
         if($sevarth_id == null) sendError(array('error' => "sevarth id is null at 59 training model"));
@@ -70,6 +75,7 @@ class Training_model extends CI_Model
             'training_status_id' => $training_status,
             'hod_id' => $hod_id,
             'principal_id' => $principal_id,
+            'training_type' => $training_type,
             'apply_letter' => $apply_letter
         );
 
@@ -115,7 +121,6 @@ class Training_model extends CI_Model
 
         $condition = array(
             "hod_id" => $hodId,
-            "training_status_id" => "1"
         );
 
         return $this->db->where($condition)->get('training')->result();
@@ -124,7 +129,7 @@ class Training_model extends CI_Model
     public function getTrainingsByPrincipalId($principalID){
 
         $condition = array(
-            "hod_id" => $principalID,
+            "principal_id" => $principalID,
             "training_status_id" => "2"
         );
         
