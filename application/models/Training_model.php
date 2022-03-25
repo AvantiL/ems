@@ -48,6 +48,41 @@ class Training_model extends CI_Model
         }
     }
 
+    public function save_completion_details(
+        $sevarth_id,
+        $training_name,
+        $duration,
+        $start_date,
+        $end_date,
+        $org_name,
+        $organized_by,
+        $training_status,
+        $hod_id,
+        $principal_id,
+        $training_type,
+        $apply_letter) {    
+
+        if($sevarth_id == null) sendError(array('error' => "sevarth id is null at 59 training model"));
+            
+        $data = array(
+            'sevarth_id' => $sevarth_id,
+            'name' => $training_name,
+            'duration' => $duration,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'org_name' => $org_name,
+            'organized_by' => $organized_by,
+            'training_status_id' => $training_status,
+            'hod_id' => $hod_id,
+            'principal_id' => $principal_id,
+            'training_type' => $training_type,
+            'comp_certificate' => $apply_letter
+        );
+
+        $this->db->insert('training', $data);
+
+        return $this->db->insert_id();
+    }
     public function save_details(
         $sevarth_id,
         $training_name,
@@ -84,6 +119,8 @@ class Training_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    
+
     public function get_training_status($training_id){
         return $this->db->where('id', $training_id)->get('training')->result()[0]->training_status_id;
     }
@@ -99,6 +136,7 @@ class Training_model extends CI_Model
     public function update_training_application($training_id, $file_name){
         $data = array(
             'apply_letter' => $file_name,
+            "training_status_id" => "6"
         );
 
         $this->db->where('id', $training_id)->update('training', $data);
@@ -113,7 +151,7 @@ class Training_model extends CI_Model
     }
 
     public function getTrainingsById($sevarthId){
-        return $this->db->where('sevarth_id', $sevarthId)->get('training')->result();
+        return $this->db->where('sevarth_id', $sevarthId)->order_by("id", "DESC")->get('training')->result();
     }
         
 
@@ -123,17 +161,15 @@ class Training_model extends CI_Model
             "hod_id" => $hodId,
         );
 
-        return $this->db->where($condition)->get('training')->result();
+        return $this->db->where($condition)->order_by("id", "DESC")->get('training')->result();
     }
 
     public function getTrainingsByPrincipalId($principalID){
 
-        $condition = array(
-            "principal_id" => $principalID,
-            "training_status_id" => "2"
-        );
+        $condition = "principal_id=$principalID AND training_status_id='2' OR training_status_id='7'";
+
         
-        return $this->db->where($condition)->get('training')->result();
+        return $this->db->where($condition)->order_by("id", "DESC")->get('training')->result();
 
     }
         
@@ -146,5 +182,11 @@ class Training_model extends CI_Model
         $this->db->where('id', $training_id)->update('training', $data);
 
         return array("status" => "Training Status ID Updated");
+    }
+
+    public function get_training_type($status_id){
+        $response = $this->db->where("id", $status_id)->get("training_type")->result()[0];
+        
+        return $response;
     }
 }
