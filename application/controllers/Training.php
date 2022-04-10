@@ -190,8 +190,9 @@ class Training extends CI_Controller
     
     public function get_trainings_by_hod(){
         $hod_id = $this->input->post("hod_id");
+        $status_id = $this->input->post("status_id");
 
-        $result = $this->Training_model->getTrainingsByHodId($hod_id);
+        $result = $this->Training_model->getTrainingsByHodId($hod_id, $status_id);
 
         sendSuccess($result);
 
@@ -199,8 +200,9 @@ class Training extends CI_Controller
 
     public function get_trainings_by_principal(){
         $principal_id = $this->input->post("principal_id");
+        $status_id = $this->input->post("status_id");
 
-        $result = $this->Training_model->getTrainingsByPrincipalId($principal_id);
+        $result = $this->Training_model->getTrainingsByPrincipalId($principal_id, $status_id);
 
         sendSuccess($result);
 
