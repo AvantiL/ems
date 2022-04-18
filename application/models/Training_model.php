@@ -31,8 +31,7 @@ class Training_model extends CI_Model
         return $this->db->get("training_type")->result();
     }
 
-    public function get_principal_by_organization($department_id, $organization_id)
-    {
+    public function get_principal_by_organization($department_id, $organization_id){
         $condition = array(
             'dept_id' => $department_id,
             'org_id' => $organization_id,
@@ -83,6 +82,7 @@ class Training_model extends CI_Model
 
         return $this->db->insert_id();
     }
+    
     public function save_details(
         $sevarth_id,
         $training_name,
@@ -119,8 +119,6 @@ class Training_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    
-
     public function get_training_status($training_id){
         return $this->db->where('id', $training_id)->get('training')->result()[0]->training_status_id;
     }
@@ -154,7 +152,6 @@ class Training_model extends CI_Model
         return $this->db->where('sevarth_id', $sevarthId)->order_by("id", "DESC")->get('training')->result();
     }
         
-
     public function getTrainingsByHodId($hodId){
 
         $condition = array(
