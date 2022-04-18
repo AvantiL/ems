@@ -46,6 +46,21 @@ class Training_model extends CI_Model
             sendError(array('error ' => "not found"));
         }
     }
+    public function get_registrar_by_organization($department_id, $organization_id){
+        $condition = array(
+            'dept_id' => $department_id,
+            'org_id' => $organization_id,
+            'role_id' => 4, // role id of registrar
+        );
+
+        if($this->db->where($condition)->get('employees')->num_rows() > 0){
+            $registrar_id = (array) $this->db->where($condition)->get('employees')->result()[0];
+
+            return $registrar_id['sevarth_id'];
+        }else{
+            sendError(array('error ' => "not found"));
+        }
+    }
 
     public function save_completion_details(
         $sevarth_id,
