@@ -19,6 +19,7 @@ class IOApplication extends CI_Controller
 
         $org_id = $this->input->post('org_id');
         $department_id = $this->input->post('department_id');
+        $application_type = $this->input->post('application_type');
         
         $config = array(
             'upload_path' => "uploads/io_applications", //path for upload
@@ -42,7 +43,17 @@ class IOApplication extends CI_Controller
             $registrar_id = $this->Training_model->get_registrar_by_organization($department_id, $org_id);
 
 
-            $this->IO_model->save_io_details($sevarth_id,$title,$desc,$date,$fileName,$hod_id,$registrar_id,$principal_id);
+            $this->IO_model->save_io_details(
+                $sevarth_id,
+                $title,
+                $desc,
+                $date,
+                $fileName,
+                $hod_id,
+                $registrar_id,
+                $principal_id,
+                $application_type
+            );
             
             sendSuccess(array("status"=> "Application Applied Successfully"));
         }
