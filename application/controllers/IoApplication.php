@@ -14,7 +14,7 @@ class IOApplication extends CI_Controller
         $sevarth_id = $this->input->post('sevarth_id');
         $title = $this->input->post('title');
         $desc = $this->input->post('desc');
-        $date = $this->inputt->post('date');
+        $date = $this->input->post('date');
         
 
         $org_id = $this->input->post('org_id');
