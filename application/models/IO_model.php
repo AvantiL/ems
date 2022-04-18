@@ -1,9 +1,4 @@
 <?php
-
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-
 class IO_model extends CI_Model
 {
     public function save_io_details(
@@ -122,4 +117,4 @@ class IO_model extends CI_Model
     {
         return $this->db->where('id', $application_id)->get('applications')->result();
     }
-}
+} ?>

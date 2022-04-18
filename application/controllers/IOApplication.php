@@ -11,10 +11,10 @@ class IOApplication extends CI_Controller
     
     public function apply_io_application()
     {
-        $sevarth_id = $this->input->post('sevarth_id');
-        $title = $this->input->post('title');
-        $desc = $this->input->post('desc');
-        $date = $this->inputt->post('date');
+        $sevarth_id = $this->input()->post('sevarth_id');
+        $title = $this->input()->post('title');
+        $desc = $this->input()->post('desc');
+        $date = $this->input()->post('date');
         
 
         $org_id = $this->input->post('org_id');
@@ -42,9 +42,9 @@ class IOApplication extends CI_Controller
             $registrar_id = $this->Training_model->get_registrar_by_organization($department_id, $org_id);
 
 
-            $this->IO_model->save_io_details($sevarth_id,$title,$desc,$date,$fileName,$hod_id,$registrar_id,$principal_id);
+            $this->IO_model->save_io_details($sevarth_id,$title,$desc,$date,$pdf,$hod_id,$registrar_id,$principal_id);
             
-            sendSuccess(array("status"=> "Application Applied Successfully"));
+            sentSuccess(array("status"=> "Application Applied Successfully"));
         }
 
 
