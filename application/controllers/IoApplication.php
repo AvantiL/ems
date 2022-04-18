@@ -62,5 +62,24 @@ class IOApplication extends CI_Controller
 
 
     }
+
+    public function update_status_id(){
+        
+        $application_id = $this->input->post("application_id");
+        $status_id = $this->input->post("status_id");
+
+        $response = $this->IO_model->update_status_id($application_id, $status_id);
+
+        sendSuccess($response);
+        
+    }
     
+    public function get_applications(){
+        $sevarth_id = $this->input->post("sevarth_id");
+        $role_id = $this->input->post("role_id");
+
+        $response = $this->IO_model->getApplicationsById($sevarth_id, $role_id);
+
+        sendSuccess($response);
+    }
 }
