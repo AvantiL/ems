@@ -67,8 +67,9 @@ class IOApplication extends CI_Controller
         
         $application_id = $this->input->post("application_id");
         $status_id = $this->input->post("status_id");
-
-        $response = $this->IO_model->update_status_id($application_id, $status_id);
+        $remark = $this->input->post("remark"); 
+        
+        $response = $this->IO_model->update_status_id($application_id, $status_id, $remark);
 
         sendSuccess($response);
         

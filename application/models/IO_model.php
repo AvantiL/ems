@@ -15,7 +15,8 @@ class IO_model extends CI_Model
         $data = array(
             'sevarth_id' => $sevarth_id,
             'title' => $title,
-            'remark' => $desc,
+            'description' => $desc,
+            'remark' => "Applied Application",
             'date' => $date,
             'application' => $pdf,
             'hod_id' => $hod_id,
@@ -102,10 +103,11 @@ class IO_model extends CI_Model
 
     }
 
-    public function update_status_id($application_id, $status_id)
+    public function update_status_id($application_id, $status_id, $remark)
     {
         $data = array(
             "status_id" => $status_id,
+            "remark" => $remark
         );
 
         $this->db->where('id', $application_id)->update('applications', $data);
