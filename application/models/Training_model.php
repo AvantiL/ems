@@ -21,7 +21,7 @@ class Training_model extends CI_Model
             return $hod_id['sevarth_id'];
 
         } else {
-            sendError(array('error ' => "not found"));
+            sendError(array('error ' => "hod not found"));
         }
 
     }
@@ -44,7 +44,7 @@ class Training_model extends CI_Model
 
             return $principal_id['sevarth_id'];
         } else {
-            sendError(array('error ' => "not found"));
+            sendError(array('error ' => "principle not found"));
         }
     }
     public function get_registrar_by_organization($department_id, $organization_id)
@@ -60,7 +60,7 @@ class Training_model extends CI_Model
 
             return $registrar_id['sevarth_id'];
         } else {
-            sendError(array('error ' => "not found"));
+            sendError(array('error ' => "registrar not found"));
         }
     }
 
