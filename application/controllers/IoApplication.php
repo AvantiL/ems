@@ -16,8 +16,12 @@ class IOApplication extends CI_Controller
         $desc = $this->input->post('desc');
         $date = $this->input->post('date');
         
+        
 
         $org_id = $this->input->post('org_id');
+        $from_department = $this->input->post('from_department');
+        
+        // department_id to which the application is being applied
         $department_id = $this->input->post('department_id');
         $application_type = $this->input->post('application_type');
         
@@ -52,7 +56,9 @@ class IOApplication extends CI_Controller
                 $hod_id,
                 $registrar_id,
                 $principal_id,
-                $application_type
+                $application_type,
+                $department_id,
+                $from_department
             );
             
             sendSuccess(array("status"=> "Application Applied Successfully"));
@@ -61,6 +67,14 @@ class IOApplication extends CI_Controller
 
 
 
+    }
+
+    public function get_employee_details(){
+        $sevarth_id = $this->input->post('sevarth_id');
+        
+        $data = $this->IO_model->get_employee_details($sevarth_id);
+
+        sendSuccess($data);
     }
 
     public function update_status_id(){
@@ -82,5 +96,12 @@ class IOApplication extends CI_Controller
         $response = $this->IO_model->getApplicationsById($sevarth_id, $role_id);
 
         sendSuccess($response);
+    }
+
+    public function get_departments(){
+        
+        $result = $this->IO_model->getDepartments();
+
+        sendSuccess($result);
     }
 }

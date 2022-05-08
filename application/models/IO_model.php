@@ -1,6 +1,20 @@
 <?php
 class IO_model extends CI_Model
 {
+
+    public function get_employee_details($sevarth_id)
+    {
+        $condition = array(
+            'sevarth_id' => $sevarth_id
+        );
+        
+        if ($this->db->where($condition)->get('employees_details')->num_rows() > 0) {
+            return $this->db->where($condition)->get('employees')->result()[0];
+        }
+
+        sendError(array('error ' => "Employee Does Added His Details"));
+    }
+    
     public function save_io_details(
         $sevarth_id,
         $title,
@@ -10,7 +24,9 @@ class IO_model extends CI_Model
         $hod_id,
         $registrar_id,
         $principal_id,
-        $application_type
+        $application_type,
+        $to_department,
+        $from_department
     ) {
         $data = array(
             'sevarth_id' => $sevarth_id,
@@ -24,6 +40,8 @@ class IO_model extends CI_Model
             'principal_id' => $principal_id,
             'status_id' => "1",
             "application_type" => $application_type,
+            "to_department" => $to_department,
+            "from_department" => $from_department
         );
 
         $this->db->insert('applications', $data);
@@ -118,5 +136,9 @@ class IO_model extends CI_Model
     public function get_application_by_id($application_id)
     {
         return $this->db->where('id', $application_id)->get('applications')->result();
+    }
+
+    public function getDepartments(){
+        return $this->db->get("departments")->result();
     }
 } ?>

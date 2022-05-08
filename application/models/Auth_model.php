@@ -7,6 +7,8 @@ if (!defined('BASEPATH')) {
 class Auth_model extends CI_Model
 {
 
+
+
     //return true if phone number exist in database
     private function checkEmailAlreadyExist($email){
 
