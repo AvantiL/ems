@@ -199,11 +199,11 @@ class Training_model extends CI_Model
     {
         if ($status_id == 0) {
             $condition = array(
-                "hod_id" => $principalID,
+                "principal_id" => $principalID,
             );
         } else {
             $condition = array(
-                "hod_id" => $principalID,
+                "principal_id" => $principalID,
                 "training_status_id" => $status_id,
             );
         }
