@@ -168,6 +168,7 @@ class Training_model extends CI_Model
     {
         $data = array(
             'comp_certificate' => $file_name,
+            'training_status_id' => "7",
         );
 
         $this->db->where('id', $training_id)->update('training', $data);
