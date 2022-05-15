@@ -18,12 +18,9 @@ class Authentication extends CI_Controller
 
 
         $data = $this->Auth_model->loginUser(
-            $this->input->post('email'),
-            $this->input->post('password'),
+            $email,
+            $password,
         );
-
-
-        // sendSuccess($data);
 
         if ($data['result']) {
             sendSuccess($data['data']);

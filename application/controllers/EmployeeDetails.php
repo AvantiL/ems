@@ -6,6 +6,7 @@ class EmployeeDetails extends CI_Controller
     public function index()
     {
         $this->load->view('welcome_message');
+        $this->load->model("Employee_model");
     }
 
     public function get_details()

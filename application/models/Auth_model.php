@@ -43,13 +43,6 @@ class Auth_model extends CI_Model
     }
 
 
-    //Register Api
-    public function register()
-    {
-        $question = $this->input->post('question');
-        $answer = $this->input->post('answer');
-    }
-
     //return true if phone number exist in database
     public function checkEmailAlreadyExist($email)
     {
@@ -74,6 +67,7 @@ class Auth_model extends CI_Model
             return false;
         }
     }
+    
     public function check_answer($email, $answer)
     {
         $user = $this->getEmployeeByEmail($email);
