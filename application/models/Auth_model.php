@@ -223,4 +223,8 @@ class Auth_model extends CI_Model
         $this->db->where("sevarth_id", $sevarth_id)->update('employees_details', $formArray);
         return $this->db->affected_rows();
     }
+
+    public function getUserBySevarthID($sevarth_id){
+        return $this->db->where("sevarth_id", $sevarth_id)->get("employees")->result();    
+    }
 }

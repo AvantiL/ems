@@ -104,7 +104,7 @@ class IO_model extends CI_Model
 
         $this->db->where('id', $application_id)->update('applications', $data);
 
-        return array("status" => "Application Status ID Updated");
+        return array("status" => "Application Status Updated Successfully");
 
     }
     public function get_application_by_id($application_id)

@@ -64,7 +64,7 @@ class Employee_model extends CI_Model
     {
         //return the row of which have same email id
         $sevarthIdCountsInDatabase = $this->db->where("sevarth_id", $sevarth_id)->get('employees_details')->num_rows();
-        if ($sevarthIdCountsInDatabase == 1) {
+        if ($sevarthIdCountsInDatabase > 0) {
             return true;
         }
         return false;

@@ -77,6 +77,74 @@ class Training extends CI_Controller
 
     }
 
+    public function apply_training_by_hod(){
+
+        $sevarth_id = $this->input->post('sevarth_id');
+        $training_name = $this->input->post('name');
+        $duration = $this->input->post('duration');
+        $start_date = $this->input->post('start_date');
+        $end_date = $this->input->post('end_date');
+        $org_name = $this->input->post('org_name');
+        $organized_by = $this->input->post('organized_by');
+
+        //1 if applied to hod and 2 if applied to principal
+        $training_status = $this->input->post('training_status_id');
+
+        $org_id = $this->input->post('org_id');
+        $department_id = $this->input->post('department_id');
+        $selected_type = $this->input->post('training_type');
+
+
+
+
+        $config = array(
+            'upload_path' => "uploads/training_applications", //path for upload
+            'allowed_types' => "pdf", //restrict extension
+            'max_size' => '300000',
+            'max_width' => '30000',
+            'max_height' => '30000',
+        );
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload("training_application")) {
+            $error = $this->upload->display_errors();
+
+            sendError($error);
+
+        } else {
+
+            $fileName = $this->upload->data('file_name');
+
+            $hod_id = -1;
+            $principal_id = $this->Training_model->get_principal_by_organization($department_id, $org_id);
+
+            $this->Training_model->save_details(
+                $sevarth_id,
+                $training_name,
+                $duration,
+                $start_date,
+                $end_date,
+                $org_name,
+                $organized_by,
+                2,
+                $hod_id,
+                $principal_id,
+                $selected_type,
+                $fileName
+            );
+
+            sendSuccess(array("status" => "Training Application Submitted Successfully "));
+
+           
+        }
+        
+        
+        
+       
+        
+        
+    }
+
     public function add_completed_training()
     {
 

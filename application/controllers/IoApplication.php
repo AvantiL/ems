@@ -16,7 +16,7 @@ class IOApplication extends CI_Controller
         $desc = $this->input->post('desc');
         $date = $this->input->post('date');
         $role_id = $this->input->post('role_id');
-
+        $name = $this->input->post('name');
         $org_id = $this->input->post('org_id');
         $from_department = $this->input->post('from_department');
         
@@ -95,6 +95,7 @@ class IOApplication extends CI_Controller
                 "application_type" => $application_type,
                 "to_dept" => $department_id,
                 "from_dept" => $from_department,
+                "applicant_name" => $name
             );
 
             $this->IO_model->save_io_details($data);
