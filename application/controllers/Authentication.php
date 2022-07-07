@@ -1,7 +1,7 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined ('BASEPATH') or exit('No direct script access allowed');
 
-class Authentication extends CI_Controller
+class Authentication extends  CI_Controller
 {
     public function index()
     {
@@ -15,7 +15,7 @@ class Authentication extends CI_Controller
         $password = $this->input->post('password');
 
         if($email == null){
-            sendError(array('error' => "Email is null"));
+            sendError(array ('error' => "Email is null"));
         }
         if($password == null){
             sendError(array('error' => "password is null"));
@@ -33,3 +33,4 @@ class Authentication extends CI_Controller
     }
 
 }
+?>
