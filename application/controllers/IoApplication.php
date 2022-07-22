@@ -15,9 +15,8 @@ class IOApplication extends CI_Controller
         $title = $this->input->post('title');
         $desc = $this->input->post('desc');
         $date = $this->input->post('date');
-        
-        
-
+        $role_id = $this->input->post('role_id');
+        $name = $this->input->post('name');
         $org_id = $this->input->post('org_id');
         $from_department = $this->input->post('from_department');
         
@@ -42,24 +41,65 @@ class IOApplication extends CI_Controller
         } else {
 
             $fileName = $this->upload->data('file_name');
-            $hod_id = $this->Training_model->get_hod_by_department_organization($department_id, $org_id);
-            $principal_id = $this->Training_model->get_principal_by_organization($department_id, $org_id);
-            $registrar_id = $this->Training_model->get_registrar_by_organization($department_id, $org_id);
 
+            $hod_id = -1;
+            $principal_id = -1;
+            $registrar_id = -1;
+            $status_id = 1;
+            $remark = "Applied By Employee";
 
-            $this->IO_model->save_io_details(
-                $sevarth_id,
-                $title,
-                $desc,
-                $date,
-                $fileName,
-                $hod_id,
-                $registrar_id,
-                $principal_id,
-                $application_type,
-                $department_id,
-                $from_department
+            //if user is employee
+            if($role_id == "1"){
+                $status_id = 1;
+                $remark = "Applied By Employee";
+                $hod_id = $this->Training_model->get_hod_by_department_organization($department_id, $org_id);
+                $principal_id = $this->Training_model->get_principal_by_organization($department_id, $org_id);
+                $registrar_id = $this->Training_model->get_registrar_by_organization($department_id, $org_id);
+            }
+            //if user is hod
+            else if($role_id == "2"){
+                $status_id = 8; // Applied by hod
+                $remark = "Applied By Hod";
+                $principal_id = $this->Training_model->get_principal_by_organization($department_id, $org_id);
+                $registrar_id = $this->Training_model->get_registrar_by_organization($department_id, $org_id);
+            }  
+
+            //if user is principal
+            else if($role_id == "3"){
+                $status_id = 9; // Applied by principal
+                $remark = "Applied By Principle";
+                $registrar_id = $this->Training_model->get_registrar_by_organization($department_id, $org_id);
+            
+            }
+            
+            //if user is registrar
+            else if($role_id == "4"){
+
+                $status_id =  10; // Applied By Registrar
+                $remark = "Applied By Registrar";
+                $principal_id =  $this->Training_model->get_principal_by_organization($department_id, $org_id);
+
+            }
+            
+            $data = array(
+                'sevarth_id' => $sevarth_id,
+                'title' => $title,
+                'description' => $desc,
+                'remark' => $remark,
+                'date' => $date,
+                'application' => $fileName,
+                'hod_id' => $hod_id,
+                'registrar_id' => $registrar_id,
+                'principal_id' => $principal_id,
+                'status_id' => $status_id,
+                "application_type" => $application_type,
+                "to_dept" => $department_id,
+                "from_dept" => $from_department,
+                "applicant_name" => $name
             );
+
+            $this->IO_model->save_io_details($data);
+
             
             sendSuccess(array("status"=> "Application Applied Successfully"));
         }

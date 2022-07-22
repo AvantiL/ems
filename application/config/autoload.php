@@ -132,6 +132,6 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array("Auth_model", "Training_model", "IO_model", "Dsr_model");
+$autoload['model'] = array("Auth_model", "Training_model", "IO_model", "Employee_model", "Dsr_model");
 
 ?>

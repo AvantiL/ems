@@ -15,34 +15,8 @@ class IO_model extends CI_Model
         sendError(array('error ' => "Employee Does Added His Details"));
     }
     
-    public function save_io_details(
-        $sevarth_id,
-        $title,
-        $desc,
-        $date,
-        $pdf,
-        $hod_id,
-        $registrar_id,
-        $principal_id,
-        $application_type,
-        $to_department,
-        $from_department
-    ) {
-        $data = array(
-            'sevarth_id' => $sevarth_id,
-            'title' => $title,
-            'description' => $desc,
-            'remark' => "Applied Application",
-            'date' => $date,
-            'application' => $pdf,
-            'hod_id' => $hod_id,
-            'registrar_id' => $registrar_id,
-            'principal_id' => $principal_id,
-            'status_id' => "1",
-            "application_type" => $application_type,
-            "to_department" => $to_department,
-            "from_department" => $from_department
-        );
+    public function save_io_details($data) {
+        
 
         $this->db->insert('applications', $data);
 
@@ -130,7 +104,7 @@ class IO_model extends CI_Model
 
         $this->db->where('id', $application_id)->update('applications', $data);
 
-        return array("status" => "Application Status ID Updated");
+        return array("status" => "Application Status Updated Successfully");
 
     }
     public function get_application_by_id($application_id)

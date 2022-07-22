@@ -168,6 +168,7 @@ class Training_model extends CI_Model
     {
         $data = array(
             'comp_certificate' => $file_name,
+            'training_status_id' => "7",
         );
 
         $this->db->where('id', $training_id)->update('training', $data);
@@ -199,11 +200,11 @@ class Training_model extends CI_Model
     {
         if ($status_id == 0) {
             $condition = array(
-                "hod_id" => $principalID,
+                "principal_id" => $principalID,
             );
         } else {
             $condition = array(
-                "hod_id" => $principalID,
+                "principal_id" => $principalID,
                 "training_status_id" => $status_id,
             );
         }

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -52,3 +52,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+// Module A - B Routes
+
+
+$route['login'] = 'Authentication/login';
+$route['register'] = 'Authentication/register';
+
+$route['set_forgot_password'] = 'Authentication/set_forgot_password';
+$route['get_fp_question'] = 'Authentication/get_fp_question';
+
+//To check mail Existes
+$route['check_mail_exists'] = 'Authentication/check_mail_exists';
+//To get the forgot password question
+$route['get_fp_question'] = 'Authentication/get_fp_question';
+
+$route['validate_answer'] = 'Authentication/validate_answer';
+$route['reset_password'] = 'Authentication/reset_password';
+$route['get_organization'] = 'Authentication/get_organization';
+$route['get_department'] = 'Authentication/get_department';
+$route['get_role'] = 'Authentication/get_role';
+
+$route['register_user'] = 'Authentication/register_user';
+$route['check_key'] = 'Authentication/check_key';
+
+$route['add_details'] = 'EmployeeDetails/add_details';
+$route['get_details'] = 'EmployeeDetails/get_details';
+$route['edit_details'] = 'EmployeeDetails/edit_details';
+
+$route['show_verifications'] = 'AdminController/show_verifications';
+$route['show_employees'] = 'AdminController/show_employees';
+
+$route['accept_principle_request'] = 'AdminController/accept_principle_request';
+$route['decline_principle_request'] = 'AdminController/decline_principle_request';
+$route['delete_employee'] = 'AdminController/delete_employee';
